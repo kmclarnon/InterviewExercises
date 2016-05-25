@@ -9,10 +9,10 @@ public class Exercise1 {
    *
    * You will not be given arrays that contain no single value that is used most frequently
    *
-   * @param integers - the array of integers to example
+   * @param ints - the array of integers to example
    * @return the most frequent integer in the given array
    */
-  public int run(int[] integers) {
+  public int run(int[] ints) {
     int result = 0;
 
     // insert your solution here
