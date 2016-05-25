@@ -21,9 +21,18 @@ public class Exercise1Tests extends TestBase {
   private static final List<Integer> testSizeList = ImmutableList.of(15, 30, 50, 100);
 
   @Test
-  public void itPassesRandomizedTests() {
+  public void itPassesSpecificTests() {
     Exercise1 solution = new Exercise1();
+    ImmutableList<Integer> test1 = ImmutableList.of(1, 2, 3, 3);
+    assertThat(solution.run(toIntArray(test1))).as("Checking most common value in %s", test1).isEqualTo(getMostCommonInteger(test1).get());
+    ImmutableList<Integer> test2 = ImmutableList.of(1, 2, 3, 1, 3, 2, 3);
+    assertThat(solution.run(toIntArray(test2))).as("Checking most common value in %s", test1).isEqualTo(getMostCommonInteger(test2).get());
+  }
+
+  @Test
+  public void itPassesRandomizedTests() {
     for (int testSize : testSizeList) {
+      Exercise1 solution = new Exercise1();
       List<Integer> testData;
       Optional<Integer> mostCommonInteger;
       do {
