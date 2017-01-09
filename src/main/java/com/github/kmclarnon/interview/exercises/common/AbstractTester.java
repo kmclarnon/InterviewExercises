@@ -19,14 +19,34 @@ public abstract class AbstractTester {
 
   public abstract void initialize() throws Exception;
 
+  public void dryRun(Exercise exercise) {
+    run(exercise, true);
+  }
+
   public void test(Exercise exercise) {
+    run(exercise, false);
+  }
+
+
+  protected void putInputOutput(String input, String outputFile) {
+    inputOutputMap.put(input, outputFile);
+  }
+
+  private void run(Exercise exercise, boolean dryRun) {
     try {
       // delegate to subclass
       initialize();
 
-      // process tests
-      inputOutputMap.entrySet()
-          .forEach(e -> test(exercise, e.getKey(), e.getValue()));
+      if (dryRun) {
+        // run the exercise through its input
+        inputOutputMap.entrySet()
+            .forEach(e -> dryRun(exercise, e.getKey()));
+      } else {
+        // run the actual tests
+        inputOutputMap.entrySet()
+            .forEach(e -> test(exercise, e.getKey(), e.getValue()));
+      }
+
     } catch (Exception e) {
       throw new RuntimeException("Failed to initialize test of " + exercise.getClass().getSimpleName());
     } finally {
@@ -35,8 +55,9 @@ public abstract class AbstractTester {
     }
   }
 
-  protected void putInputOutput(String input, String outputFile) {
-    inputOutputMap.put(input, outputFile);
+  private void dryRun(Exercise exercise, String input) {
+    System.out.println(String.format("Running %s with input: %s", exercise.getClass().getSimpleName(), input));
+    exercise.run(input);
   }
 
   private void test(Exercise exercise, String input, String expectedOutputFile) {

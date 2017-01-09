@@ -6,6 +6,6 @@ public class Exercise1 implements Exercise {
 
   @Override
   public void run(String input) {
-    System.out.println("hello");
+
   }
 }
