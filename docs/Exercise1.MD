@@ -47,3 +47,5 @@ Your task is to find how many times each Area code occurs in the input file. Onc
 867:5
 401:4
 ```
+### Operation 2 - TBD
+### Operation 3 - TBD
